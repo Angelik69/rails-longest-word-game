@@ -1,13 +1,23 @@
-<h1>New Game</h1>
 
-<p><%= p @letters %></p>
+<div class="container">
+  <h1 class="mb-3">New Game</h1>
 
-<form action="/score" method="POST" data-turbo="false">
-  <label for="word">What is the longest word you can find?</label>
-  <div>
-    <input type="text" name="word" required>
-    <button></button>
-  </div>
-  <%= hidden_field_tag :letters, @letters.join %>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-</form>
+  <% @letters.each do |letter| %>
+    <div class="border p-2 me-3 bg-primary text-white" style="display: inline-block; box-shadow: 0 3px 5px rgba(0,0,0,.1);">
+      <h3 class="font-monospace m-0 fw-bold ms-2 me-2">
+        <%= letter%>
+      </h3>
+    </div>
+  <% end %>
+
+  <form action="/score" method="POST" data-turbo="false" class="form-control mt-3">
+    <label for="word">What is the longest word you can find?</label>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" name="word">
+      <button class="btn btn-primary" type="submit">Play</button>
+    </div>
+    <%= hidden_field_tag :letters, @letters.join %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  </form>
+
+</div>
